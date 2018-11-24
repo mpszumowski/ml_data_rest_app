@@ -32,11 +32,11 @@ paths:
     post:
       operationId: api.download_images
       parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/UrlSchema'
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/UrlSchema'
       responses:
         200:
           description: Downloading images from url
