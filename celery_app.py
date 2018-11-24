@@ -7,7 +7,7 @@ def create_celery_app():
     app_name = 'celery_app'
     broker = os.environ.get('CELERY_BROKER')
     backend = os.environ.get('CELERY_BACKEND')
-    include = ['app.tasks']
+    include = ['tasks']
     try:
         app = Celery(app_name=app_name, broker=broker,
                      backend=backend, include=include)
