@@ -1,0 +1,6 @@
+bs4==0.0.1
+celery==4.2.1
+cheroot==6.5.2
+connexion==2.0.2
+flask==1.0.2
+requests==2.20.1
