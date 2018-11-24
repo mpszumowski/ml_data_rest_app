@@ -1,5 +1,4 @@
 import requests
-
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 
@@ -33,4 +32,4 @@ def get_text(url):
     page = get_page(url)
     texts = page.findAll(text=True)
     visible_texts = filter(tag_visible, texts)
-    # " ".join(t.strip() for t in visible_texts)
+    return " ".join(t.strip() for t in visible_texts)
