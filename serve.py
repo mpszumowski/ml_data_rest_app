@@ -1,9 +1,9 @@
-import os
-
 import connexion
 from cheroot.wsgi import Server
 
+from config import rest_cfg
 from info import __version__, __title__
+
 
 connexion_app = connexion.FlaskApp(
     __name__,
@@ -20,7 +20,6 @@ connexion_app.add_api('swagger.yaml')
 app = connexion_app.app
 
 if __name__ == "__main__":
-    bind_address = os.environ.get('APP_ADDRESS')
-    port = int(os.environ.get('PORT'))
-    server = Server((bind_address, port), app)
+    bind_address = (rest_cfg['address'], int(rest_cfg['port']))
+    server = Server(bind_address, app)
     server.start()
