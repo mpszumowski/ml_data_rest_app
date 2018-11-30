@@ -3,34 +3,9 @@ info:
   title: '{{title}}'
   version: '{{version}}'
 paths:
-  /download/text:
+  /ml/content/text:
     post:
-      operationId: api.download_text
-      parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/UrlSchema'
-      responses:
-        200:
-          description: Downloading text from url
-          schema:
-            $ref: '#/definitions/StatusResponse'
-        400:
-          description: Invalid request body
-          schema:
-            $ref: '#/definitions/StatusResponse'
-    get:
       operationId: api.fetch_text
-      responses:
-        200:
-          description: Fetching downloaded text
-          schema:
-            $ref: '#/definitions/StatusResponse'
-  /download/images:
-    post:
-      operationId: api.download_images
       parameters:
       - in: body
         name: body
@@ -38,8 +13,8 @@ paths:
         schema:
           $ref: '#/definitions/UrlSchema'
       responses:
-        200:
-          description: Downloading images from url
+        202:
+          description: Accepted request, downloading text from url
           schema:
             $ref: '#/definitions/StatusResponse'
         400:
@@ -47,23 +22,15 @@ paths:
           schema:
             $ref: '#/definitions/StatusResponse'
     get:
-      operationId: api.fetch_images
+      operationId: api.download_text
       responses:
         200:
-          description: Fetching downloaded images
+          description: Download text fetched from urls
           schema:
-            $ref: '#/definitions/StatusResponse'
-  /download:
+            type: file
+  /ml/content/text/{task_id}:
     get:
-      operationId: api.fetch_all
-      responses:
-        200:
-          description: Fetching downloaded items
-          schema:
-            $ref: '#/definitions/StatusResponse'
-  /task/{task_id}:
-    get:
-      operationId: api.check_task
+      operationId: api.get_text_task_status
       parameters:
         - in: path
           name: task_id
@@ -71,9 +38,59 @@ paths:
           type: string
       responses:
         200:
-          description: Task_id checked
+          description: Get status of task for given ID
           schema:
             $ref: '#/definitions/StatusResponse'
+  /ml/content/images:
+    post:
+      operationId: api.fetch_images
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/UrlSchema'
+      responses:
+        202:
+          description: Accepted request, downloading text from url
+          schema:
+            $ref: '#/definitions/StatusResponse'
+        400:
+          description: Invalid request body
+          schema:
+            $ref: '#/definitions/StatusResponse'
+    get:
+      operationId: api.download_images
+      produces:
+        - application/zip
+      responses:
+        200:
+          description: Download images fetched from urls
+          schema:
+            type: file
+  /ml/content/images/{task_id}:
+    get:
+      operationId: api.get_image_task_status
+      parameters:
+        - in: path
+          name: task_id
+          required: true
+          type: string
+      responses:
+        200:
+          description: Get status of task for given ID
+          schema:
+            $ref: '#/definitions/StatusResponse'
+  /ml/content:
+    get:
+      operationId: api.download_all
+      produces:
+        - application/zip
+      responses:
+        200:
+          description: Download all fetched files
+          schema:
+            type: file
 definitions:
   UrlSchema:
     properties:
