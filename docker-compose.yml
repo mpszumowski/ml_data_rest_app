@@ -4,38 +4,47 @@ services:
   rest_app:
     build: .
     image: rest_app
-    container_name: rest_app
-    ports:
-      - '${PORT}:${PORT}'
-    environment:
-      - APP_ADDRESS
-      - PORT
-      - CELERY_BROKER
-      - CELERY_BACKEND
+    restart: always
+    volumes:
+      - ./data:/usr/src/webfetch/data:rw
     depends_on:
       - redis
+      - mongo
+    env_file:
+      - '.env'
+    ports:
+      - '${PORT}:${PORT}'
+
 
   celery:
+    build: .
     image: rest_app
-    command: celery -A celery_app worker --loglevel=debug
-    user: nobody
-    environment:
-      - CELERY_BROKER
-      - CELERY_BACKEND
+    restart: always
+    volumes:
+      - ./data:/usr/src/webfetch/data:rw
     depends_on:
       - rest_app
       - redis
+      - mongo
+    user: nobody
+    env_file:
+      - '.env'
+    command: celery -A celery_app worker --loglevel=info
+
 
   redis:
     image: redis:3.2.11
+    restart: always
     ports:
-      - "6379:6379"
+      - '6379:6379'
 
-  monitor:
-    image: rest_app
+  mongo:
+    image: mongo:4.0.4
+    volumes:
+      - mongodb_volume:/data/db
+    restart: always
     ports:
-      - '5555:5555'
-    command:  flower -A celery_app --port=5555 --broker=redis://redis:6379/0
-    depends_on:
-      - rest_app
-      - redis
+      - '27017:27017'
+
+volumes:
+  mongodb_volume:
