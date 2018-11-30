@@ -3,6 +3,6 @@ celery==4.2.1
 cheroot==6.5.2
 connexion[swagger-ui]==2.0.2
 flask==1.0.2
-flower==0.9.2
+pymongo==3.7.2
 redis==2.10.6
 requests==2.20.1
