@@ -6,7 +6,7 @@ services:
     image: rest_app
     restart: always
     volumes:
-      - ./data:/usr/src/webfetch/data:rw
+      - ./data:/usr/src/ml_data/ml_data/data:rw
     depends_on:
       - redis
       - mongo
@@ -21,7 +21,7 @@ services:
     image: rest_app
     restart: always
     volumes:
-      - ./data:/usr/src/webfetch/data:rw
+      - ./data:/usr/src/ml_data/ml_data/data:rw
     depends_on:
       - rest_app
       - redis
@@ -29,7 +29,7 @@ services:
     user: nobody
     env_file:
       - '.env'
-    command: celery -A celery_app worker --loglevel=info
+    command: celery -A ml_data.celery_app worker --loglevel=info
 
 
   redis:

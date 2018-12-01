@@ -1,11 +1,11 @@
 from celery import Celery, exceptions
 
-from config import celery_cfg
+from ml_data.config import celery_cfg
 
 
 def create_celery_app():
-    app_name = 'celery_app'
-    include = ['tasks']
+    app_name = 'ml_data.celery_app'
+    include = ['ml_data.tasks']
     try:
         app = Celery(app_name=app_name,
                      broker=celery_cfg['broker'],

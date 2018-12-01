@@ -6,13 +6,10 @@ from typing import Dict
 from celery.result import AsyncResult
 from flask import jsonify, send_file
 
-from celery_app import c_app
-from config import DATA_DIR
-from database import get_celery_db
-from log import get_logger
-from tasks import get_images, get_text
-
-logger = get_logger()
+from ml_data.celery_app import c_app
+from ml_data.config import DATA_DIR
+from ml_data.database import get_celery_db
+from ml_data.tasks import get_images, get_text
 
 
 def fetch_images(body: Dict) -> Dict:

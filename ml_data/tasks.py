@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup
 from bs4.element import Comment
 from bson.objectid import ObjectId
 
-from celery_app import c_app
-from config import DATA_DIR
-from database import get_celery_db
+from ml_data.celery_app import c_app
+from ml_data.config import DATA_DIR
+from ml_data.database import get_celery_db
 
 db = get_celery_db()
 

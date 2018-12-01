@@ -5,7 +5,7 @@ info:
 paths:
   /ml/content/text:
     post:
-      operationId: api.fetch_text
+      operationId: ml_data.api.fetch_text
       parameters:
       - in: body
         name: body
@@ -18,7 +18,7 @@ paths:
         400:
           description: Invalid request body
     get:
-      operationId: api.download_text
+      operationId: ml_data.api.download_text
       responses:
         200:
           description: Download text fetched from urls
@@ -26,7 +26,7 @@ paths:
             type: file
   /ml/content/text/{task_id}:
     get:
-      operationId: api.get_text_task_status
+      operationId: ml_data.api.get_text_task_status
       parameters:
         - in: path
           name: task_id
@@ -37,7 +37,7 @@ paths:
           description: Get status of task for given ID
   /ml/content/images:
     post:
-      operationId: api.fetch_images
+      operationId: ml_data.api.fetch_images
       parameters:
       - in: body
         name: body
@@ -50,7 +50,7 @@ paths:
         400:
           description: Invalid request body
     get:
-      operationId: api.download_images
+      operationId: ml_data.api.download_images
       produces:
         - application/zip
       responses:
@@ -60,7 +60,7 @@ paths:
             type: file
   /ml/content/images/{task_id}:
     get:
-      operationId: api.get_image_task_status
+      operationId: ml_data.api.get_image_task_status
       parameters:
         - in: path
           name: task_id
@@ -71,7 +71,7 @@ paths:
           description: Get status of task for given ID
   /ml/content:
     get:
-      operationId: api.download_all
+      operationId: ml_data.api.download_all
       produces:
         - application/zip
       responses:

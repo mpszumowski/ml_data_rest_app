@@ -2,8 +2,8 @@
 FROM python:3.6.4
 
 # set working directory
-RUN mkdir -p /usr/src/webfetch
-WORKDIR /usr/src/webfetch
+RUN mkdir -p /usr/src/ml_data
+WORKDIR /usr/src/ml_data
 
 # add requirements
 COPY requirements.txt requirements.txt
@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # run command
-CMD [ "python", "-m", "serve" ]
+CMD [ "python", "-m", "ml_data.serve" ]

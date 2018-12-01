@@ -1,9 +1,8 @@
 import connexion
 from cheroot.wsgi import Server
 
-from config import rest_cfg
-from info import __version__, __title__
-
+from ml_data.config import rest_cfg
+from ml_data.info import __version__, __title__
 
 connexion_app = connexion.FlaskApp(
     __name__,
@@ -22,4 +21,5 @@ app = connexion_app.app
 if __name__ == "__main__":
     bind_address = (rest_cfg['address'], int(rest_cfg['port']))
     server = Server(bind_address, app)
+    print('starting server...')
     server.start()

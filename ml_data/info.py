@@ -1,4 +1,4 @@
-__title__ = 'webfetch'
+__title__ = 'ml_data'
 MAJOR_VERSION = 0
 MINOR_VERSION = 1
 MICRO_VERSION = 0
