@@ -15,12 +15,8 @@ paths:
       responses:
         202:
           description: Accepted request, downloading text from url
-          schema:
-            $ref: '#/definitions/StatusResponse'
         400:
           description: Invalid request body
-          schema:
-            $ref: '#/definitions/StatusResponse'
     get:
       operationId: api.download_text
       responses:
@@ -39,8 +35,6 @@ paths:
       responses:
         200:
           description: Get status of task for given ID
-          schema:
-            $ref: '#/definitions/StatusResponse'
   /ml/content/images:
     post:
       operationId: api.fetch_images
@@ -53,12 +47,8 @@ paths:
       responses:
         202:
           description: Accepted request, downloading text from url
-          schema:
-            $ref: '#/definitions/StatusResponse'
         400:
           description: Invalid request body
-          schema:
-            $ref: '#/definitions/StatusResponse'
     get:
       operationId: api.download_images
       produces:
@@ -79,8 +69,6 @@ paths:
       responses:
         200:
           description: Get status of task for given ID
-          schema:
-            $ref: '#/definitions/StatusResponse'
   /ml/content:
     get:
       operationId: api.download_all
@@ -97,11 +85,4 @@ definitions:
       url:
         type: string
     required: [url]
-    type: object
-  StatusResponse:
-    properties:
-      message:
-        type: string
-      title:
-        type: string
     type: object

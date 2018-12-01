@@ -19,14 +19,18 @@ def fetch_images(body: Dict) -> Dict:
     url = body['url']
     task = get_images.delay(url)
     response = jsonify()
-    response.headers['location'] = '/todo/{}'.format(todo.todo_ID)
-    return {'task_id': task.id}
+    response.headers['location'] = '/ml/content/images/{}'.format(task.id)
+    response.status_code = 202
+    return response
 
 
 def fetch_text(body: Dict) -> Dict:
     url = body['url']
     task = get_text.delay(url)
-    return {'task_id': task.id}
+    response = jsonify()
+    response.headers['location'] = '/ml/content/text/{}'.format(task.id)
+    response.status_code = 202
+    return response
 
 
 def _gen_image_fp():
