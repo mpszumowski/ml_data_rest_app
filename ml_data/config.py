@@ -1,6 +1,7 @@
 import os
 
-ROOT_DIR = os.path.dirname(__file__)
+APP_DIR = os.path.dirname(__file__)
+ROOT_DIR = os.path.dirname(APP_DIR)
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 
 celery_cfg = {
