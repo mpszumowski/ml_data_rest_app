@@ -57,7 +57,8 @@ def _gen_text_data(bytes_data: io.BytesIO) -> io.BytesIO:
 
 def download_text():
     data = io.BytesIO()
-    data = _gen_text_data(data).seek(0)
+    data = _gen_text_data(data)
+    data.seek(0)
     return send_file(data, as_attachment=True,
                      attachment_filename='ML_data_text.txt',
                      mimetype='text/plain')
