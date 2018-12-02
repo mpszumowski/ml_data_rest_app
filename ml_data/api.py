@@ -8,7 +8,7 @@ from flask import jsonify, send_file
 
 from ml_data.celery_app import c_app
 from ml_data.config import DATA_DIR
-from ml_data.database import get_celery_db
+from ml_data.database import db
 from ml_data.tasks import get_images, get_text
 
 
@@ -47,7 +47,6 @@ def download_images():
 
 
 def _gen_text_data(bytes_data: io.BytesIO) -> io.BytesIO:
-    db = get_celery_db()
     text_cursor = db.text.find({'content': {'$exists': True}},
                                {'_id': 0, 'content': 1})
     for text in text_cursor:

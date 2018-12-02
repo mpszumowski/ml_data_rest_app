@@ -6,12 +6,11 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 from bson.objectid import ObjectId
+from pymongo import MongoClient
 
 from ml_data.celery_app import c_app
 from ml_data.config import DATA_DIR
-from ml_data.database import get_celery_db
-
-db = get_celery_db()
+from ml_data.database import MongoCfg
 
 
 def get_page(url):
@@ -33,6 +32,7 @@ def get_text(self, url):
     texts = page.findAll(text=True)
     visible_texts = filter(tag_visible, texts)
     text = ' '.join(t.strip() for t in visible_texts)
+    db = MongoClient(**MongoCfg.client)[MongoCfg.db_name]
     db.text.insert_one({'task_id': self.request.id,
                         'url': url,
                         'content': text})
@@ -41,6 +41,9 @@ def get_text(self, url):
 
 @c_app.task(bind=True)
 def get_images(self, url):
+    db = MongoClient(**MongoCfg.client)[MongoCfg.db_name]
+    logger = c_app.log.get_default_logger()
+    logger.info(os.getuid())
     page = get_page(url)
     for img_tag in page.find_all('img'):
         img_url = urljoin(url, img_tag['src'])
