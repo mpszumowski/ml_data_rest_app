@@ -31,9 +31,11 @@ At default service UI can be accessed at `localhost:8000/ui/`
     - GET: Download all content
 - ml/content/[images, text]/{task_id}
     - GET: check status for given task_id in headers.locations
+<br><br><b>Note:</b> the app is currently defined with swagger 2.0 specification. Swagger-ui has been found to supply corrupted links for Content-Disposition file responses. Until the definition is not updated to OpenApi 3.0 please use direct endpoint urls (such as 'localhost:8000/ml/content') when testing with swagger-ui.
 
 ## TODOS
 
 - Modify currently ad hoc MongoDB client instantiation for each task
 - Set MongoDB instance as Celery backend (at the moment celery lacks support for mongo)
 - Clean the storage periodically/on request
+- Update swagger.yaml definition from 2.0 to OpenApi v. 3.0
