@@ -6,7 +6,7 @@ services:
     image: rest_app
     restart: always
     volumes:
-      - ./data:/usr/src/ml_data/data:rw
+      - ml_data_volume:/usr/src/ml_data/data:rw
     depends_on:
       - redis
       - mongo
@@ -20,12 +20,11 @@ services:
     image: rest_app
     restart: always
     volumes:
-      - ./data:/usr/src/ml_data/data:rw
+      - ml_data_volume:/usr/src/ml_data/data:rw
     depends_on:
       - rest_app
       - redis
       - mongo
-    user: nobody
     env_file:
       - '.env'
     command: celery -A ml_data.celery_app worker --loglevel=info
@@ -46,3 +45,4 @@ services:
 
 volumes:
   mongodb_volume:
+  ml_data_volume:
