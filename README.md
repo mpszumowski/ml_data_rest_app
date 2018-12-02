@@ -8,7 +8,7 @@ An instance of MongoDB stores their filenames and text data. Deployed with Docke
 ## Run:
 
 `cp .env.example .env` - configure necessary environment variables
-`docker-compose up`
+<br>`docker-compose up` - run containers
 
 At default service UI can be accessed at `localhost:8000/ui/`
 
